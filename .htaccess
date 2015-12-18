@@ -1,0 +1,44 @@
+#Options +FollowSymlinks
+RewriteEngine On
+
+# Если в начале (admin), то применяется правило
+RewriteCond %{REQUEST_URI} ^/(admin)
+RewriteRule ^admin/assets/(.*)$ backend/web/assets/$1 [L]
+RewriteRule ^admin/css/(.*)$ backend/web/css/$1 [L]
+RewriteRule ^admin/js/(.*)$ backend/web/js/$1 [L]
+RewriteRule ^admin/fonts/(.*)$ backend/web/fonts/$1 [L]
+RewriteRule ^admin/img/(.*)$ backend/web/img/$1 [L]
+
+RewriteCond %{REQUEST_URI} !^/backend/web/(assets|css|js|fonts|img|images)/
+RewriteCond %{REQUEST_URI} ^/(admin)
+RewriteRule ^.*$ backend/web/index.php [L]
+
+RewriteCond %{REQUEST_URI} ^/(test|api|app|partials|assets|css|js|fonts|img|images|files|uploads|makeup|photos|certificates|semantic)
+RewriteRule ^test/(.*)$ frontend/web/test/$1 [L]
+RewriteRule ^api/(.*)$ frontend/web/api/$1 [L]
+RewriteRule ^app/(.*)$ frontend/web/app/$1 [L]
+RewriteRule ^partials/(.*)$ frontend/web/partials/$1 [L]
+RewriteRule ^assets/(.*)$ frontend/web/assets/$1 [L]
+RewriteRule ^css/(.*)$ frontend/web/css/$1 [L]
+RewriteRule ^js/(.*)$ frontend/web/js/$1 [L]
+RewriteRule ^fonts/(.*)$ frontend/web/fonts/$1 [L]
+RewriteRule ^img/(.*)$ frontend/web/img/$1 [L]
+RewriteRule ^images/(.*)$ frontend/web/images/$1 [L]
+RewriteRule ^files/(.*)$ frontend/web/files/$1 [L]
+RewriteRule ^uploads/(.*)$ frontend/web/uploads/$1 [L]
+RewriteRule ^photos/(.*)$ frontend/web/photos/$1 [L]
+RewriteRule ^semantic/(.*)$ frontend/web/semantic/$1 [L]
+RewriteRule ^certificates/(.*)\.(jpg|pdf)$ frontend/web/certificates/$1 [L]
+
+RewriteCond %{REQUEST_URI} !^/(frontend|backend)/web/(test|app|partials|assets|css|js|fonts|img|images|files|uploads|photos|certificates|semantic)/
+RewriteCond %{REQUEST_URI} !index.php
+RewriteCond %{REQUEST_URI} !favicon.ico
+RewriteCond %{REQUEST_URI} !gitpull.php
+RewriteCond %{REQUEST_URI} !db.php
+
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ frontend/web/index.php
+
+
+AddCharset utf-8 .js

@@ -1,0 +1,20 @@
+
+<div class="row" ng-init="init()">
+    <h1>Vocabulary Test</h1>
+    <hr>
+    <div class="alert alert-danger" role="alert" ng-show="show_max_error"> <strong>Oh snap!</strong> You have committed three mistakes. <a href="/">Start test again</a> </div>
+    <div class="alert alert-success" role="alert" ng-show="complete_test"> <strong>Well done!</strong> You successfully complete Vocabulary Test. Your result: {{test_errors}} errors and {{words_count-test_errors}} right answers. <a href="/">Try again?</a></div>
+    <div class="alert alert-danger" role="alert" ng-show="show_error && !show_max_error"> <strong>Oh snap!</strong> Check another option and try submitting again. </div>
+    <div class="jumbotron" ng-hide="complete_test||show_max_error">
+        <div class="counter">{{counter}}/{{words_count}}</div>
+        <p class="lead text-left"><b>Translate the word:</b></p>
+        <p class="lead text-left">{{dict.word}}</p>
+    </div>
+    <form name="testForm" id="{{testId}}" ng-submit="checkAnswer()" novalidate ng-hide="complete_test||show_max_error">
+        <label ng-repeat-start="translate in dict.translates">
+            <input type="radio" ng-model="dict.choose" ng-model="choosen.answer_id" ng-value="translate.id" name="options" required>
+            {{translate.word}}
+        </label><br ng-repeat-end/>
+        <button class="btn btn-lg btn-primary pull-right" type="submit" ng-disabled="testForm.$invalid">Check</button>
+    </form>
+</div>

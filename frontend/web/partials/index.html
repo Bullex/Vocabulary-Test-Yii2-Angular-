@@ -1,0 +1,16 @@
+<div class="jumbotron">
+    <h1>Vocabulary Test</h1>
+
+    <p class="lead" ng-show="loggedIn()">Hi, {{user.name}}</p>
+    <label for="name-input" class="lead" ng-hide="loggedIn()">Type your name or <a href="/login">login</a></label>
+    <form ng-submit="goToTest()" name="userForm" novalidate>
+        <div class="input-group input-group" ng-hide="loggedIn()">
+            <span class="input-group-addon" id="sizing-addon1">@</span>
+            <input type="text" class="form-control" placeholder="Username"
+                   aria-describedby="sizing-addon1" name="name-input" id="name-input" ng-value="username" required
+                   ng-model="user.name">
+        </div>
+
+        <p><button type="submit" class="btn btn-lg btn-success" ng-disabled="userForm.$invalid">Let&#8217;s start</button></p>
+    </form>
+</div>
